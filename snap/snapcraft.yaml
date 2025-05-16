@@ -1,0 +1,29 @@
+name: tcp-socket-bluedrop-demo
+version: '0.1'
+summary: TCP Socket Snap for ctrlX Automation SDK
+description: |
+  A simple application that opens a TCP socket and communicates with a Python server.
+base: core22
+grade: stable
+confinement: strict
+
+architectures:
+  - build-on: [amd64, arm64]
+    build-for: [amd64]
+  - build-on: [amd64, arm64]
+    build-for: [arm64]
+
+apps:
+  tcp-socket-bluedrop-demo:
+    command: tcp-socket-bluedrop-demo
+    plugs:
+      - network
+    daemon: simple
+    restart-condition: always
+    passthrough:
+      restart-delay: 10s
+
+parts:
+  tcp-socket-bluedrop-demo:
+    plugin: dump
+    source: ./generated/build
